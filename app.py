@@ -103,6 +103,26 @@ def main():
      ############### Step 4 Training a Logistic Regression Classifier ##########
      # Start you Code here #
 
+    if classifier == 'Logistice Regression':
+        st.sidebar.subheader("Model Hyperparameters")
+        C = st.sidebar.number_input("C (Regularization parameter)", 0.01, 10.0, step=0.01, key='C')
+        # kernel = st.sidebar.radio("Kernel", ("rbf", "linear"), key='kernel')
+        # gamma  = st.sidebar.radio("Gamma (Kernel Coefficient)", ("scale", "auto"), key='gamma')
+        metrics = st.sidebar.multiselect("What metrics to plot?", ("Confusion Matrix", "ROC Curve", "Precision-Recall Curve"))
+        
+        if st.sidebar.button("Classify", key='classify'):
+            st.subheader("Logistice Regression results")
+            model = LogisticRegression(C=C)
+            model.fit(x_train,y_train)
+            accuracy = model.score(x_test, y_test)
+            y_pred   = model.predict(x_test)
+            precision = precision_score(y_test, y_pred).round(2)
+            recall = recall_score(y_test, y_pred).round(2)
+            
+            st.write("Accuracy: ", round(accuracy, 2))
+            st.write("Precision: ", precision)
+            st.write("Recall: ", recall)
+            plot_metrics(metrics)
 
 
 
@@ -111,6 +131,26 @@ def main():
 
      ############### Step 5 Training a Random Forest Classifier ##########
     # Start you Code here #
+
+    if classifier == 'Random Forest':
+        st.sidebar.subheader("Model Hyperparameters")
+        N = st.sidebar.number_input("N (n_estimators)", 1.0, 200.0, step=1.0, key='N')
+        D = st.sidebar.number_input("Depth", 0.1, 10.0, step=0.1, key='D')
+        metrics = st.sidebar.multiselect("What metrics to plot?", ("Confusion Matrix", "ROC Curve", "Precision-Recall Curve"))
+        
+        if st.sidebar.button("Classify", key='classify'):
+            st.subheader("Random Forest results")
+            model = RandomForestClassifier(n_estimators=int(N), max_depth=int(D))
+            model.fit(x_train,y_train)
+            accuracy = model.score(x_test, y_test)
+            y_pred   = model.predict(x_test)
+            precision = precision_score(y_test, y_pred).round(2)
+            recall = recall_score(y_test, y_pred).round(2)
+            
+            st.write("Accuracy: ", round(accuracy, 2))
+            st.write("Precision: ", precision)
+            st.write("Recall: ", recall)
+            plot_metrics(metrics)    
 
 
 
