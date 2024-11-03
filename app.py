@@ -69,7 +69,7 @@ def main():
     x_train, x_test, y_train, y_test = spliting_data(df)
     class_names = ['edible','poisonous']
     st.sidebar.subheader("Choose Classifiers")
-    classifier  = st.sidebar.selectbox("Classifier", ("Support Vectore Machine (SVM)", "Logistice Regression", "Random Forest"))
+    classifier  = st.sidebar.selectbox("Classifier", ("Support Vectore Machine (SVM)", "Logistic Regression", "Random Forest"))
 
 
      ############### Step 3 Train a SVM Classifier ##########
@@ -103,7 +103,7 @@ def main():
      ############### Step 4 Training a Logistic Regression Classifier ##########
      # Start you Code here #
 
-    if classifier == 'Logistice Regression':
+    if classifier == 'Logistic Regression':
         st.sidebar.subheader("Model Hyperparameters")
         C = st.sidebar.number_input("C (Regularization parameter)", 0.01, 10.0, step=0.01, key='C')
         # kernel = st.sidebar.radio("Kernel", ("rbf", "linear"), key='kernel')
@@ -111,7 +111,7 @@ def main():
         metrics = st.sidebar.multiselect("What metrics to plot?", ("Confusion Matrix", "ROC Curve", "Precision-Recall Curve"))
         
         if st.sidebar.button("Classify", key='classify'):
-            st.subheader("Logistice Regression results")
+            st.subheader("Logistic Regression results")
             model = LogisticRegression(C=C)
             model.fit(x_train,y_train)
             accuracy = model.score(x_test, y_test)
@@ -135,7 +135,7 @@ def main():
     if classifier == 'Random Forest':
         st.sidebar.subheader("Model Hyperparameters")
         N = st.sidebar.number_input("N (n_estimators)", 1.0, 200.0, step=1.0, key='N')
-        D = st.sidebar.number_input("Depth", 0.1, 10.0, step=0.1, key='D')
+        D = st.sidebar.number_input("Depth", 1, 10.0, step=1, key='D')
         metrics = st.sidebar.multiselect("What metrics to plot?", ("Confusion Matrix", "ROC Curve", "Precision-Recall Curve"))
         
         if st.sidebar.button("Classify", key='classify'):
