@@ -135,7 +135,7 @@ def main():
     if classifier == 'Random Forest':
         st.sidebar.subheader("Model Hyperparameters")
         N = st.sidebar.number_input("N (n_estimators)", 1.0, 200.0, step=1.0, key='N')
-        D = st.sidebar.number_input("Depth", 1, 10.0, step=1, key='D')
+        D = st.sidebar.number_input("Depth", 1.0, 10.0, step=1.0, key='D')
         metrics = st.sidebar.multiselect("What metrics to plot?", ("Confusion Matrix", "ROC Curve", "Precision-Recall Curve"))
         
         if st.sidebar.button("Classify", key='classify'):
